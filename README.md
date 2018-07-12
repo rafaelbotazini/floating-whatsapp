@@ -58,7 +58,7 @@ $('.floating-wpp').floatingWhatsApp({
 | phone               | `string`                                      | `''`                     | WhatsApp number which will receive the message.
 | message             | `string`                                      | `''`                     | Message to be sent. If `showPopup` is `true`, the input will be populated with this message.
 | position            | `'left'` &#124; `'right'`                     | `'left'`                 | Position of the button the screen.
-| popupMessage        | `string`'                                     | `''`                     | Message to be shown as a received message in the fake chat.
+| popupMessage        | `string`                                      | `''`                     | Message to be shown as a received message in the fake chat.
 | showPopup           | `bool`                                        | `false`                  | Show a fake chat popup when the user hovers (on desktop) or clicks the button (on mobile).
 | autoOpenTimeout     | `Number`                                      | `0`                      | Set an amount of time in milliseconds for the popup to open automaticaly.
 | headerColor         | any css color `string`                        | `'#128C7E'`              | Background color of the popup window title bar.
