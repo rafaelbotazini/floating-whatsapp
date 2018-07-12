@@ -47,9 +47,9 @@
     box-shadow: 1px 2px 8px rgba(60, 60, 60, 0.25);
     width: 0px;
     height: 0px;
-    bottom: 82px;
-    transition: width 0.2s, height 0.2s, padding 0.2s;
-    /*transition-delay: 0.2s;*/
+    bottom: 0;
+    opacity: 0;
+    transition: bottom 0.1s ease-out, opacity 0.2s ease-out;
     transform-origin: bottom;
 }
 
@@ -57,6 +57,8 @@
     padding: 0 12px 12px 12px;
     width: 260px;
     height: auto;
+    bottom: 82px;
+    opacity: 1;
 }
 
 .floating-wpp .floating-wpp-popup .floating-wpp-message {
