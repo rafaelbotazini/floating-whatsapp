@@ -2,22 +2,31 @@
     position: fixed;
     bottom: 15px;
     left: 15px;
-    font-family: 'Open sans';
     font-size: 14px;
     transition: bottom 0.2s;
 }
 
 .floating-wpp .floating-wpp-button {
+    position: relative;
     width: 72px;
     height: 72px;
     background-color: #25D366;
-    background-image: url('whatsapp.svg');
-    background-position: center;
-    background-size: 180%;
     border-radius: 50%;
     box-shadow: 1px 1px 4px rgba(60, 60, 60, 0.4);
     transition: box-shadow 0.2s;
     cursor: pointer;
+    overflow: hidden;
+}
+
+.floating-wpp .floating-wpp-button img,
+.floating-wpp .floating-wpp-button svg {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
 }
 
 .floating-wpp:hover {
@@ -38,9 +47,9 @@
     box-shadow: 1px 2px 8px rgba(60, 60, 60, 0.25);
     width: 0px;
     height: 0px;
-    bottom: 82px;
-    transition: width 0.2s, height 0.2s, padding 0.2s;
-    /*transition-delay: 0.2s;*/
+    bottom: 0;
+    opacity: 0;
+    transition: bottom 0.1s ease-out, opacity 0.2s ease-out;
     transform-origin: bottom;
 }
 
@@ -48,6 +57,8 @@
     padding: 0 12px 12px 12px;
     width: 260px;
     height: auto;
+    bottom: 82px;
+    opacity: 1;
 }
 
 .floating-wpp .floating-wpp-popup .floating-wpp-message {
