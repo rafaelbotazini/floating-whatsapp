@@ -1,21 +1,4 @@
 (function ($) {
-    var button = $(document.createElement('div'));
-    var popup = $(document.createElement('div'));
-    var head = $(document.createElement('div'));
-    var message = $(document.createElement('div'));
-    var btnSend = $(document.createElement('div'));
-    var inputMessage = $(document.createElement('div'));
-
-    button.addClass('floating-wpp-button');
-
-    var apilink = 'https://';
-
-    apilink += !mobilecheck() && navigator.userAgent.match('Firefox') ? 'web' : 'api';
-
-    function openWhatsApp (settings) {
-        window.open(apilink + '.whatsapp.com/send?phone=' + settings.phone + '&text=' + encodeURI(settings.message)); 
-    }
-
     $.fn.floatingWhatsApp = function (options) {
         var settings = $.extend({
             phone: '',
@@ -23,93 +6,104 @@
             position: 'left',
             popupMessage: '',
             showPopup: false,
-            autoOpen: false,
-            autoOpenTimer: 4000,
+            autoOpenTimeout: 0,
             headerColor: '#128C7E',
             headerTitle: '',
         }, options);
 
-        button.on('click', function() {
+        //#region jQuery Elements
+
+        var $button = $(document.createElement('div'));
+        var $popup = $(document.createElement('div'));
+        var $header = $(document.createElement('div'));
+        var $message = $(document.createElement('div'));
+        var $btnSend = $(document.createElement('div'));
+        var $inputMessage = $(document.createElement('div'));
+        //#endregion
+
+        //#region Main Button
+        $button.addClass('floating-wpp-button');
+        $button.appendTo(this);
+
+        $button.on('click', function() {
             if (mobilecheck() && settings.showPopup) {
                 openPopup();
             }
             else {
-                openWhatsApp(settings);
+                sendWhatsappMessage(settings);
             }
         });
+        //#endregion
 
-        button.appendTo(this);
+        //#region Fake Chat Pop-up
 
         if (settings.showPopup) {
-            popup.addClass('floating-wpp-popup');
-            head.addClass('floating-wpp-head');
-            message.addClass('floating-wpp-message');
-            inputMessage.addClass('floating-wpp-input-message');
-            btnSend.addClass('floating-wpp-btn-send');
 
-            popup.appendTo(this);
-            head.appendTo(popup);
-            message.appendTo(popup);
-            inputMessage.appendTo(popup);
-            btnSend.appendTo(inputMessage);
+            var $textarea = $(document.createElement('textarea'));
+            var $closeBtn = $(document.createElement('strong'));
+            var $sendIcon = $('<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 20 18" width="20" height="18"><defs><clipPath id="_clipPath_fgX00hLzP9PnAfCkGQoSPsYB7aEGkj1G"><rect width="20" height="18"/></clipPath></defs><g clip-path="url(#_clipPath_fgX00hLzP9PnAfCkGQoSPsYB7aEGkj1G)"><path d=" M 0 0 L 0 7.813 L 16 9 L 0 10.188 L 0 18 L 20 9 L 0 0 Z " fill="rgb(46,46,46)"/></g></svg>')
 
-            var textarea = $(document.createElement('textarea'));
-            var closeBtn = $(document.createElement('strong'));
-            
-            head.append('<span>' + settings.headerTitle + '</span>');
-            head.append(closeBtn);
+            $popup.addClass('floating-wpp-popup');
+            $header.addClass('floating-wpp-head');
+            $message.addClass('floating-wpp-message');
+            $inputMessage.addClass('floating-wpp-input-message');
+            $btnSend.addClass('floating-wpp-btn-send');
 
-            $('<?xml version="1.0" encoding="UTF-8" standalone="no"?>' +
-              '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="isolation:isolate" viewBox="0 0 20 18" width="20" height="18"><defs><clipPath id="_clipPath_fgX00hLzP9PnAfCkGQoSPsYB7aEGkj1G"><rect width="20" height="18"/></clipPath></defs><g clip-path="url(#_clipPath_fgX00hLzP9PnAfCkGQoSPsYB7aEGkj1G)"><path d=" M 0 0 L 0 7.813 L 16 9 L 0 10.188 L 0 18 L 20 9 L 0 0 Z " fill="rgb(46,46,46)"/></g></svg>').appendTo(btnSend);
+            $header.append('<span>' + settings.headerTitle + '</span>', $closeBtn)
+                .css('background-color', settings.headerColor);
 
-            inputMessage.prepend(textarea);
+            $btnSend.append($sendIcon);
+            $inputMessage.append($textarea, $btnSend);
 
-            closeBtn.html('&times;');
-            closeBtn.addClass('close');
+            $closeBtn.addClass('close').html('&times;');
 
-            head.css('background-color', settings.headerColor);
+            $popup.append(
+                $header,
+                $message,
+                $inputMessage)
+                .appendTo(this);
 
-            message.click(function() {
-                //openWhatsApp(settings);
+            $message.click(function() {
+                //sendWhatsappMessage(settings);
             });
 
-            closeBtn.click(function() {
+            $closeBtn.click(function() {
                 //popup.removeClass('active');
             });
 
-            head.click(function() {
-                popup.removeClass('active'); 
+            $header.click(function() {
+                $popup.removeClass('active');
             });
 
-            textarea.keypress(function(event) {
+            $textarea.keypress(function(event) {
                 settings.message = $(this).val();
-                
+
                 if (event.keyCode == 13 && !event.shiftKey) {
-                    btnSend.click();
+                    $btnSend.click();
                 }
             });
 
-            btnSend.click(function () {
-                settings.message = textarea.val();
-                openWhatsApp(settings);
+            $btnSend.click(function () {
+                settings.message = $textarea.val();
+                sendWhatsappMessage(settings);
             });
 
             this.mouseenter(function() {
                 openPopup();
             });
 
-            if (settings.autoOpen) {
+            if (settings.autoOpenTimeout > 0) {
                 setTimeout(function () {
                     openPopup();
-                }, settings.autoOpenTimer);
+                }, settings.autoOpenTimeout);
             }
 
             function openPopup(){
-                if (!popup.hasClass('active')) {
-                    popup.addClass('active');
-                    message.text(settings.popupMessage);
-                    textarea.val(settings.message);
-                    textarea.focus();
+                if (!$popup.hasClass('active')) {
+                    $popup.addClass('active');
+                    $message.text(settings.popupMessage);
+                    $textarea.val(settings.message);
+                    $textarea.focus();
                 }
             }
         }
@@ -119,10 +113,10 @@
                 left: 'unset',
                 right: '15px'
             });
-            popup.css('right', '0');
+            $popup.css('right', '0');
         }
 
-        //this.css(settings.css);
+        //#endregion
     }
 
     function mobilecheck() {
