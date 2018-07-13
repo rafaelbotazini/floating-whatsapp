@@ -20,7 +20,7 @@ Link the files to your html (make sure you load the files after jQuery)
 
 ## How to use it
 
-Create a div with the `floating-wpp` class and select it with jQuery, then call the plugin using the function `$().floatingWhatsApp([options])`
+Create a div element with the `floating-wpp` class and select it with jQuery, then call the plugin using the function `$().floatingWhatsApp([options])`.
 
 ```html
 <body>
@@ -55,12 +55,13 @@ $('.floating-wpp').floatingWhatsApp({
 
 | option              | value                                         | default                  | description |
 |---------------------|-----------------------------------------------|--------------------------|-------------|
-| phone               | `string`                                      | `''`                     | WhatsApp number which will receive the message.
+| phone               | `string`                                      | `''`                     | WhatsApp [intenational number](https://faq.whatsapp.com/en/general/21016748) which will receive the message.
 | message             | `string`                                      | `''`                     | Message to be sent. If `showPopup` is `true`, the input will be populated with this message.
 | position            | `'left'` &#124; `'right'`                     | `'left'`                 | Position of the button the screen.
 | popupMessage        | `string`                                      | `''`                     | Message to be shown as a received message in the fake chat.
 | showPopup           | `bool`                                        | `false`                  | Show a fake chat popup when the user hovers (on desktop) or clicks the button (on mobile).
 | autoOpenTimeout     | `Number`                                      | `0`                      | Set an amount of time in milliseconds for the popup to open automaticaly.
 | headerColor         | any css color `string`                        | `'#128C7E'`              | Background color of the popup window title bar.
-| headerTitle         | `string`                                      | `'WhatsApp Chat'`        | Text to be displayed at the popup window title bar
-| buttonImage         | `jQuery` object &#124; css selector `string`  | [this one](whatsapp.svg) | Button background image. Must be an `img` or `svg` in order to be displayed properly
+| headerTitle         | `string`                                      | `'WhatsApp Chat'`        | Text to be displayed at the popup window title bar.
+| buttonImage         | `jQuery` object &#124; css selector `string`  | [this one](whatsapp.svg) | Button background image. Must be an `img` or `svg` in order to be displayed properly.
+| zIndex              | `Number` &#124; `string`                      | none                     | Overrides `.floating-wpp` div z-index. Use a z-index css property value.
