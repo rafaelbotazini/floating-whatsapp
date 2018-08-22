@@ -18,7 +18,7 @@
         var $buttonImageContainer = $(document.createElement('div'));
         var $popup = $(document.createElement('div'));
         var $header = $(document.createElement('div'));
-        var $message = $(document.createElement('div'));
+        var $popupMessage = $(document.createElement('div'));
         var $btnSend = $(document.createElement('div'));
         var $inputMessage = $(document.createElement('div'));
         //#endregion
@@ -50,15 +50,15 @@
 
             $popup.addClass('floating-wpp-popup');
             $header.addClass('floating-wpp-head');
-            $message.addClass('floating-wpp-message');
+            $popupMessage.addClass('floating-wpp-message');
             $inputMessage.addClass('floating-wpp-input-message');
             $btnSend.addClass('floating-wpp-btn-send');
 
-            $message.text(settings.popupMessage);
+            $popupMessage.text(settings.popupMessage);
             $textarea.val(settings.message);
 
-            if (!settings.message) {
-                $message.hide();
+            if (!settings.popupMessage) {
+                $popupMessage.hide();
             }
 
             $header.append('<span>' + settings.headerTitle + '</span>', $closeBtn)
@@ -71,11 +71,11 @@
 
             $popup.append(
                 $header,
-                $message,
+                $popupMessage,
                 $inputMessage)
                 .appendTo(this);
 
-            $message.click(function () {
+            $popupMessage.click(function () {
                 //sendWhatsappMessage();
             });
 
