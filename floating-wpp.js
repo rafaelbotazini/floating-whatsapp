@@ -133,7 +133,7 @@
 
         if (settings.position === 'right') {
             this.css({
-                left: 'unset',
+                left: 'auto',
                 right: '15px'
             });
             $popup.css('right', '0');
