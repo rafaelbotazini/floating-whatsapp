@@ -56,13 +56,13 @@ You can customize the appearance of the button and the chat window:
 $('#myDiv').floatingWhatsApp({
     phone: '5491133359850',
     popupMessage: 'Hello, how can we help you?',
+    message: "I'd like to order a pizza",
     showPopup: true,
-    position: 'right',
-    autoOpen: false,
-    autoOpenTimeout: 4000,
-    message: 'I would like to order a pizza',
+    showOnIE: false,
+    headerTitle: 'Welcome!',
     headerColor: 'crimson',
-    headerTitle: 'Chat with us in WhatsApp!',
+    backgroundColor: 'crimson',
+    buttonImage: '<img src="burger.svg" />'
 });
 ```
 
