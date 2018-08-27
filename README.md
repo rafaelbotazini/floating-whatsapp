@@ -20,36 +20,53 @@ Link the files to your html (make sure you load the files after jQuery)
 
 ## How to use it
 
-Create a div element with the `floating-wpp` class and select it with jQuery, then call the plugin using the function `$().floatingWhatsApp([options])`.
+Create a div element and select it with jQuery, then call the plugin using the function `$().floatingWhatsApp([options])`.
 
 ```html
 <body>
-  <div class="floating-wpp"></div>
+  <div id="myDiv"></div>
 </body>
 <script type="text/javascript">
   $(function () {
-    $('.floating-wpp').floatingWhatsApp();
+    $('#myDiv').floatingWhatsApp({
+      phone: '5491133359850'
+    });
   });
 </script>
 ```
+### Fake Chat Window
+
+Enable a little fake chat window floating above the button:
+
+```js
+$('#myDiv').floatingWhatsApp({
+    phone: '5491133359850',
+    popupMessage: 'Hello, how can we help you?',
+    showPopup: true
+});
+```
+
+![Fake Chat Window](fake-chat.png)
 
 ### Customization
 
-Customize the button passing an options object as a parameter to the `floatingWhatsApp` function
+You can customize the appearance of the button and the chat window:
 
 ```js
-$('.floating-wpp').floatingWhatsApp({
-    phone: '554443232',
+$('#myDiv').floatingWhatsApp({
+    phone: '5491133359850',
     popupMessage: 'Hello, how can we help you?',
+    message: "I'd like to order a pizza",
     showPopup: true,
-    position: 'right',
-    autoOpen: false,
-    autoOpenTimeout: 4000,
-    message: 'I would like to order a pizza',
-    headerColor: 'orange',
-    headerTitle: 'Chat with us in WhatsApp!',
+    showOnIE: false,
+    headerTitle: 'Welcome!',
+    headerColor: 'crimson',
+    backgroundColor: 'crimson',
+    buttonImage: '<img src="burger.svg" />'
 });
 ```
+
+![Custom settings](custom-settings.png)
 
 ### Options
 
@@ -65,3 +82,6 @@ $('.floating-wpp').floatingWhatsApp({
 | headerTitle         | `string`                                      | `'WhatsApp Chat'`        | Text to be displayed at the popup window title bar.
 | buttonImage         | `jQuery` object &#124; css selector `string`  | [this one](whatsapp.svg) | Button background image. Must be an `img` or `svg` in order to be displayed properly.
 | zIndex              | `Number` &#124; `string`                      | none                     | Overrides `.floating-wpp` div z-index. Use a z-index css property value.
+| showOnIE            | `boolean`                                     | `true`                   | Whether to show or not the button on IE (recommended, since IE does not support WhatsApp Web).
+| size                | `string` (Any css option valid for width and height properties) | `'72px'` | The size of the button
+| backgroundColor     | Any css color `string`                        | `'#25D366'`               | The button backgrund color.
