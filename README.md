@@ -24,7 +24,7 @@ Create a div element and select it with jQuery, then call the plugin using the f
 
 ```html
 <body>
-  <div class="floating-wpp"></div>
+  <div id="myDiv"></div>
 </body>
 <script type="text/javascript">
   $(function () {
