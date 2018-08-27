@@ -8,9 +8,6 @@
 
 .floating-wpp .floating-wpp-button {
     position: relative;
-    width: 72px;
-    height: 72px;
-    background-color: #25D366;
     border-radius: 50%;
     box-shadow: 1px 1px 4px rgba(60, 60, 60, 0.4);
     transition: box-shadow 0.2s;
