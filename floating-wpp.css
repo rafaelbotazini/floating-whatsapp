@@ -24,6 +24,7 @@
     top: 50%;
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
+    border-radius: 50%;
 }
 
 .floating-wpp:hover {
@@ -107,4 +108,22 @@
     margin-left: 12px;
     font-size: 0;
     cursor: pointer;
+}
+
+.floating-wpp-avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px 0 10px 10px;
+}
+
+.floating-wpp-avatar-info {
+    color: white;
+    margin: 10px 80px 0 10px;
+    text-align: left;
+}
+.floating-wpp-avatar-name {
+    font-weight: bold;
+    font-size: 16px;
 }
