@@ -147,11 +147,7 @@
         //#endregion
 
         function sendWhatsappMessage() {
-            var apilink = 'http://';
-
-            apilink += isMobile ? 'api' : 'web';
-            apilink += '.whatsapp.com/send?phone=' + settings.phone + '&text=' + encodeURI(settings.message);
-
+            const apilink = 'https://wa.me/' + settings.phone + '?text=' + encodeURI(settings.message);
             window.open(apilink);
         }
     }
