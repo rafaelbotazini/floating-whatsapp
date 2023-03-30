@@ -22,13 +22,14 @@
     $(function () {
         $('#myButton').floatingWhatsApp({
             phone: '5491133359850',
-            popupMessage: 'Hello, how can we help you?',
-            message: "I'd like to order a pizza",
+            popupMessage: ['Hello, how can we help you?', 'Did you know we are 50% off today?'],
+            message: "I think i love you",
             showPopup: true,
             showOnIE: false,
             headerTitle: 'Welcome!',
             headerColor: 'crimson',
             backgroundColor: 'crimson',
+            headerTypingMessage: 'typing...',
             buttonImage: '<img src="burger.svg" />'
         });
     });
