@@ -117,8 +117,10 @@
 
             this.mouseenter(function () {
                 openPopup();
-                !isPopupMessageShown && settings.popupMessage && showPopupMessages();
-                isPopupMessageShown = true;
+                if (!isPopupMessageShown) {
+                    showPopupMessages();
+                    isPopupMessageShown = true;
+                }
             });
 
             if (settings.autoOpenTimeout > 0) {
@@ -134,13 +136,17 @@
                 }
             }
             function showPopupMessages(){
+                let originalHeaderTitle = $header.html();
                 $header.html('<span>' + settings.headerTypingMessage + '</span>', $closeBtn);
                 $.each(settings.popupMessage, function(index, value) {
                     setTimeout(function() {
                         $popupMessage.append('<div class="floating-wpp-message">' + value + '</div>');
                     }, index * 1000);
-                    console.log($popupMessage);
                 });
+                setTimeout(function() {
+                    $header.html(originalHeaderTitle);
+                    console.log('ola sou eu denovo.');
+                }, settings.popupMessage.length * 1000);
             }
 
         }
