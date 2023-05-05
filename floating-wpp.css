@@ -61,10 +61,11 @@
 
 .floating-wpp .floating-wpp-popup .floating-wpp-message {
     background-color: white;
-    padding: 8px;
+    padding: 0.5rem;
     border-radius: 0px 5px 5px 5px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
     opacity: 0;
+    margin: 1rem 0;
     transition: opacity 0.2s;
 }
 
